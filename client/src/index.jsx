@@ -12,6 +12,22 @@ class App extends React.Component {
     }
 
   }
+  
+  componentDidMount() {
+    $.ajax({
+      method: 'GET',
+      url: '/repos',
+      // data: 
+      // dataType:
+      contentType: 'application/json',
+      success: data => {
+        console.log('get success', data);
+        this.state.repos = data;
+        console.log(this.state.repos)
+      },
+      error: error => console.log('get error', error)
+    });
+  }
 
   search (term) {
     console.log(`${term} was searched`);
@@ -22,8 +38,8 @@ class App extends React.Component {
       data: JSON.stringify({ username: term }),
       // dataType: 'json',
       contentType: 'application/json',
-      success: data => console.log('success', data),
-      error: (error) => console.log('error', error)
+      success: data => console.log('post success', data),
+      error: error => console.log('post error', error)
     });
     
   }

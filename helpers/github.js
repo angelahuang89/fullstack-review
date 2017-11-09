@@ -19,7 +19,7 @@ let getReposByUsername = (username, callback) => {
   request(options, (error, response, body) => {
     if (!error & response.statusCode === 200) {
       if (error) {
-        callback(err, null);
+        callback(error, null);
       } else {
         var repos = JSON.parse(body);
         callback(null, repos);
