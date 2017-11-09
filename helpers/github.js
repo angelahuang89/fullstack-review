@@ -18,9 +18,8 @@ let getReposByUsername = (username) => {
 
   request(options, (error, response, body) => {
     if (!error & response.statusCode === 200) {
-      var info = JSON.parse(body);
-      console.log(info);
-      return info;
+      var repos = JSON.parse(body);
+      // insert repos to database
     }
   });
 
