@@ -8,6 +8,14 @@ class Search extends React.Component {
     }
     this.onChange = this.onChange.bind(this);
     this.search = this.search.bind(this);
+    this.post = this.post.bind(this);
+  }
+  
+  post (username) {
+    $.ajax({
+      type: 'POST',
+      data: username
+    })
   }
 
   onChange (e) {
@@ -18,6 +26,7 @@ class Search extends React.Component {
 
   search() {
     this.props.onSearch(this.state.term);
+    this.post(this.state.term)
   }
 
   render() {

@@ -26,6 +26,4 @@ let getReposByUsername = (username) => {
 
 }
 
-getReposByUsername('angelahuang89');
-
 module.exports.getReposByUsername = getReposByUsername;
