@@ -20,12 +20,19 @@ app.post('/repos', function (req, res) {
     } else {
       results.forEach(item => {
         var document = new db.Repo(item);
-        db.save(document);
+        db.save(document, (error, results) => {
+          if (error) {
+            console.log(error);
+            res.status(400);
+            res.end();
+          } else {
+            res.status(201);
+            res.end();
+          }
+        });
       });
     }
   });
-  res.status(201);
-  res.end();
 });
 
 app.get('/repos', function (req, res) {

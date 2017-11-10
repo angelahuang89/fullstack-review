@@ -10,10 +10,10 @@ class App extends React.Component {
     this.state = { 
       repos: []
     }
-    this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);
+    this.getRepos = this.getRepos.bind(this);
   }
   
-  componentDidMount() {
+  getRepos () {
     $.ajax({
       method: 'GET',
       url: '/repos',
@@ -28,9 +28,13 @@ class App extends React.Component {
     });
   }
   
-  componentWillReceiveProps(nextProps) {
-    this.setState({repos: nextProps});
+  componentDidMount() {
+    this.getRepos ();
   }
+  
+  // componentWillReceiveProps(nextProps) {
+  //   this.setState({repos: nextProps});
+  // }
 
   search (term) {
     console.log(`${term} was searched`);
@@ -43,7 +47,7 @@ class App extends React.Component {
       contentType: 'application/json',
       success: data => {
         console.log('post success', data);
-        this.componentWillReceiveProps(this.state.repos);
+        this.getRepos();
       },
       error: error => console.log('post error', error)
     });
