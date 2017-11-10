@@ -19,8 +19,8 @@ app.post('/repos', function (req, res) {
       console.log(error);
     } else {
       results.forEach(item => {
-        var document = new db.Repo(item);
-        db.save(document, (error, results) => {
+        var repoDoc = new db.Repo(item);
+        db.save(repoDoc, (error, results) => {
           if (error) {
             console.log(error);
             res.status(400);

@@ -11,6 +11,7 @@ let getReposByUsername = (username, callback) => {
   let options = {
     url: `https://api.github.com/users/${username}/repos`,
     headers: {
+      'Accept': 'application/vnd.github.v3+json',
       'User-Agent': 'request',
       'Authorization': `token ${config.TOKEN}`
     }

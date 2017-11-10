@@ -32,11 +32,11 @@ let save = (repo, callback) => {
 }
 
 let find = (callback) => {
-  Repo.
-    find({}).
-    limit(25).
-    sort({ forks_count: -1 }).
-    exec((error, results) => {
+  Repo
+    .find({})
+    .limit(25)
+    .sort({ forks_count: -1 }).
+    .exec((error, results) => {
     if (error) {
       callback(error, null)
     } else {
