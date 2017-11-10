@@ -15,6 +15,7 @@ app.post('/repos', function (req, res) {
   // save the repo information in the database
   helpers.getReposByUsername(req.body.username, (error, results) => {
     if (error) {
+      res.status(400);
       console.log(error);
     } else {
       results.forEach(item => {
@@ -34,9 +35,10 @@ app.get('/repos', function (req, res) {
   db.find((error, results) => {
     if (error) {
       console.log(error);
+      res.status(404);
       res.end();
     } else {
-      console.log('get', results)
+      res.status(200);
       res.send(results);
     }
   });

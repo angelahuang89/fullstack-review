@@ -3,10 +3,11 @@ mongoose.connect('mongodb://localhost/fetcher');
 
 let repoSchema = mongoose.Schema({
   // TODO: your schema here!
-  id: { type: Number, unique: true },
+  id: { type: String, unique: true },
   // id: Number,
   name: String,
   full_name: String,
+  owner: Object,
   html_url: String,
   description: String,
   url: String,
@@ -27,7 +28,11 @@ let save = (repo) => {
 }
 
 let find = (callback) => {
-  Repo.find({}, (error, results) => {
+  Repo.
+    find({}).
+    limit(25).
+    sort({ forks_count: -1 }).
+    exec((error, results) => {
     if (error) {
       callback(error, null)
     } else {

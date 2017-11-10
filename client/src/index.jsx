@@ -10,7 +10,6 @@ class App extends React.Component {
     this.state = { 
       repos: []
     }
-
   }
   
   componentDidMount() {
@@ -21,9 +20,8 @@ class App extends React.Component {
       // dataType:
       contentType: 'application/json',
       success: data => {
-        console.log('get success', data);
-        this.state.repos = data;
-        console.log(this.state.repos)
+        console.log('get success');
+        this.setState({ repos: data });
       },
       error: error => console.log('get error', error)
     });
