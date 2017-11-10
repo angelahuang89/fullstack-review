@@ -10,6 +10,7 @@ class App extends React.Component {
     this.state = { 
       repos: []
     }
+    this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);
   }
   
   componentDidMount() {
@@ -17,14 +18,18 @@ class App extends React.Component {
       method: 'GET',
       url: '/repos',
       // data: 
-      // dataType:
-      contentType: 'application/json',
+      // dataType: 'application/json',
+      // contentType: 'application/json',
       success: data => {
         console.log('get success');
         this.setState({ repos: data });
       },
       error: error => console.log('get error', error)
     });
+  }
+  
+  componentWillReceiveProps(nextProps) {
+    this.setState({repos: nextProps});
   }
 
   search (term) {
@@ -36,7 +41,10 @@ class App extends React.Component {
       data: JSON.stringify({ username: term }),
       // dataType: 'json',
       contentType: 'application/json',
-      success: data => console.log('post success', data),
+      success: data => {
+        console.log('post success', data);
+        this.componentWillReceiveProps(this.state.repos);
+      },
       error: error => console.log('post error', error)
     });
     
@@ -45,8 +53,8 @@ class App extends React.Component {
   render () {
     return (<div>
       <h1>Github Fetcher</h1>
-      <RepoList repos={this.state.repos}/>
       <Search onSearch={this.search.bind(this)}/>
+      <RepoList repos={this.state.repos}/>
     </div>)
   }
 }

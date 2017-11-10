@@ -7,7 +7,8 @@ const RepoList = (props) => (
     <div>
       {props.repos.map(repo => (
         <div className="repo" key={repo.id}>
-          <p>{repo.name}: {repo.html_url}</p>
+          <p>{repo.name}: <a href={repo.html_url}>{repo.html_url}</a></p>
+          <p>Owner: <img src={repo.owner.avatar_url} alt={repo.owner.login} style={{width: 50, height: 50}} /></p> 
           <p>Description: {repo.description}</p>
           <p>Forks Count: {repo.forks_count}</p>
         </div>
